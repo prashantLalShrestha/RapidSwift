@@ -1,2 +1,3 @@
 # RapidSwift
-A set of useful Swift extensions
+
+A description of this package.
