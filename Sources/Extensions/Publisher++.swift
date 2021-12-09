@@ -20,6 +20,7 @@ public extension Publisher {
             completion = $0
             dispatchGroup.leave()
         }, receiveValue: {
+            completion = .finished
             value = $0
             dispatchGroup.leave()
         })
