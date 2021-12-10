@@ -9,7 +9,10 @@ let package = Package(
     products: [
         .library(
             name: "RapidSwift",
-            targets: ["RapidSwift", "RapidXCTest"]),
+            targets: ["RapidSwift"]),
+        .library(
+            name: "RapidXCTest",
+            targets: ["RapidXCTest"]),
     ],
     dependencies: [ ],
     targets: [
