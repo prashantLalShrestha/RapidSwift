@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "RapidSwift",
-            targets: ["RapidSwift"]),
+            targets: ["RapidSwift", "RapidXCTest"]),
     ],
     dependencies: [ ],
     targets: [
@@ -17,8 +17,12 @@ let package = Package(
             name: "RapidSwift",
             path: "Sources"
         ),
+        .target(
+            name: "RapidXCTest",
+            path: "Tests/RapidXCTest"
+        ),
         .testTarget(
             name: "RapidSwiftTests",
-            dependencies: ["RapidSwift"]),
+            dependencies: ["RapidSwift", "RapidXCTest"]),
     ]
 )
