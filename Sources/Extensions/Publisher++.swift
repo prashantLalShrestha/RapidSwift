@@ -45,17 +45,15 @@ public extension Publisher {
     
     func execute(completion: @escaping ((Result<Output, Error>) -> Void)) {
         var cancellable: AnyCancellable?
-        cancellable = self.sink { error in
-            switch error {
-            case .failure(let error):
-                completion(.failure(error))
-                cancellable?.cancel()
-            case .finished:
-                cancellable?.cancel()
-            }
-        } receiveValue: { output in
-            completion(.success(output))
+        cancellable = self.eraseToResultPublisher().sink { result in
+            completion(result)
             cancellable?.cancel()
         }
+    }
+    
+    func eraseToResultPublisher() -> AnyPublisher<Result<Output, Error>, Never> {
+        map{ .success($0) }
+        .catch{ Just(.failure($0)) }
+        .eraseToAnyPublisher()
     }
 }
